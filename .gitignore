@@ -1,0 +1,7 @@
+filters/pandoc-crossref
+filters/pandoc-crossref.exe
+filters/pandoc-crossref-nix
+csl/csl-bak/
+csl/bak/
+templates/package-lock.json
+EXTRAS/
