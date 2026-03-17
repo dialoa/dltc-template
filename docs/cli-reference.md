@@ -34,15 +34,13 @@ Append format to mode name (no space):
 | `jats` | `.jats` | JATS XML |
 | `all` | (multiple) | All applicable |
 
-## Chapter selection
+## Article selection
 
-For offprint mode, specify which article to compile:
+For offprint mode, specify which article to compile by appending the article number:
 
 - `off` — article 1 (default)
 - `off2` — article 2
 - `off3` — article 3
-- `off` with `chapter=0` — all articles
-- `off` with `chapter=1,3,5` — articles 1, 3, and 5
 
 ## Flags
 
@@ -60,7 +58,6 @@ Short flags can be combined: `-pv` = proof + verbose.
 |-----|---------|-------------|
 | `master=<file>` | `master.md` | Path to master file |
 | `pandoc=<cmd>` | `pandoc` | Pandoc command to use |
-| `chapter=<nums>` | `1` | Comma-separated chapter numbers (0 = all) |
 | `mode=<modes>` | `offprint` | Comma-separated modes |
 | `format=<fmts>` | (per mode) | Comma-separated formats |
 
@@ -85,11 +82,8 @@ dltc-make off2pdf --proof
 # or:
 dltc-make off2pdf -p
 
-# Compile all articles as HTML
-dltc-make off chapter=0
-
 # Compile all articles as both HTML and PDF
-dltc-make offall chapter=0
+dltc-make offall
 ```
 
 ### Full issue
@@ -140,8 +134,8 @@ dltc-make offpdf master=my-master.md
 # Use a specific pandoc binary
 dltc-make offpdf pandoc=/usr/local/bin/pandoc-3.6
 
-# Compile articles 1 and 4 as PDF, quiet
-dltc-make offpdf chapter=1,4 -q
+# Compile article 4 as PDF, quiet
+dltc-make off4pdf -q
 ```
 
 ## Output files

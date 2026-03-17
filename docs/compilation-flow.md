@@ -25,9 +25,9 @@ It runs `make.lua` as a Pandoc Lua script, passing all arguments through. There 
 
 - **Mode**: offprint, issue, book, bare, refs (default: offprint)
 - **Format**: html, pdf, latex, epub, jats (default: html for offprint, pdf for others)
-- **Chapters**: which articles to compile (default: 1; use 0 for all)
+- **Article number**: which article to compile for offprints (e.g., `off2` for article 2)
 - **Flags**: `--proof`, `--quiet`, `--verbose`
-- **Key-values**: `master=<file>`, `pandoc=<cmd>`, `chapter=<nums>`, etc.
+- **Key-values**: `master=<file>`, `pandoc=<cmd>`, etc.
 
 ## Step 2: Template location
 
@@ -64,8 +64,8 @@ Derived from `master.md` metadata:
 2. Else if date exists: `issue-<date>` (e.g., `issue-December-2023`)
 3. Fallback: `untitled`
 
-### Chapter files
-The `imports` list maps to chapter indices. `chapter=0` means "all chapters". Each chapter file becomes the basename for offprint output (e.g., `article-1/source.md` → `source.html`).
+### Article files
+The `imports` list maps articles by index. `off2` selects the second import, `off3` the third, etc. Each article file becomes the basename for offprint output (e.g., `article-1/source.md` → `source.html`).
 
 ### Temporary collection metadata
 `make.lua` reads `settings/collection.yaml` and fills in runtime values to create a temporary `_collection.yaml` file:
@@ -226,10 +226,10 @@ cd /dltc-workhouse/2024/75-02/
 dltc-make off1pdf --proof
 ```
 
-1. Parse args → mode: offprint, format: pdf, chapter: 1, proof: true
+1. Parse args → mode: offprint, format: pdf, article: 1, proof: true
 2. Find template at `../../template/1.2/` (2 levels up)
 3. Read `master.md`, get imports list
-4. Chapter 1 = first import (e.g., `smith-2024/source.md`)
+4. Article 1 = first import (e.g., `smith-2024/source.md`)
 5. Create `_collection.yaml` with offprint settings
 6. Run pandoc with full command (defaults + metadata + filters + template)
 7. Output: `smith-2024.proof.pdf`
@@ -241,7 +241,7 @@ cd /dltc-workhouse/2024/75-02/
 dltc-make volpdf
 ```
 
-1. Parse args → mode: issue, format: pdf, chapters: all
+1. Parse args → mode: issue, format: pdf, all articles
 2. Find template, read master.md
 3. Create `_collection.yaml` with issue settings
 4. Pandoc merges all imported articles via collection.lua
